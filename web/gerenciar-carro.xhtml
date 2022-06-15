@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      template="template.xhtml">
+   
+    <h:form>
+        <!-- linha abaixo busca menssagem para exibir -->
+        <p:messages showDetail="true"></p:messages>
+        <p:fieldset legend="Objetos">
+            <p:toolbar>
+                <p:toolbarGroup>
+                    <!-- update="@form" atualiza o FORM inteiro. pode ser inserido id="frm" no form e no update=":frm" ou seja, o ":" faz a busca na raiz -->
+                    <p:commandButton value="Novo" action="#{carroBean.novo()}" update="@form"></p:commandButton>
+                    <p:commandButton value="Salvar" action="#{carroBean.salvar()}" disabled="#{carroBean.busca == true}" update="@form"></p:commandButton>
+                    <p:commandButton value="Buscar" action="#{carroBean.buscar()}" update="@form"></p:commandButton>
+                </p:toolbarGroup>
+            </p:toolbar>
+            <p:panelGrid columns="2" rendered="#{carroBean.busca == false}">
+                <p:outputLabel value="Modelo"></p:outputLabel>
+                <p:inputText value="#{carroBean.entidade.modelo}"></p:inputText>
+
+                <p:outputLabel value="Fabricante"></p:outputLabel>
+                <p:inputText value="#{carroBean.entidade.fabricante}"></p:inputText>
+
+                <p:outputLabel value="Cor"></p:outputLabel>
+                <p:inputText value="#{carroBean.entidade.cor}"></p:inputText>
+
+                <p:outputLabel value="Ano"></p:outputLabel>
+                <p:inputMask mask="9999" value="#{carroBean.entidade.ano}"></p:inputMask>
+
+            </p:panelGrid>
+            <!-- VER: https://primefaces.github.io/primefaces/11_0_0/#/components/datatable -->
+            <p:dataTable value="#{carroBean.entidades}" var="carro" rendered="#{carroBean.busca == true}">
+                <p:column>
+                    <p:commandButton value="Editar" action="#{carroBean.editar(carro)}" update="@form"></p:commandButton>
+                    <p:commandButton value="Deletar" action="#{carroBean.deletar(carro)}" update="@form"></p:commandButton>
+                </p:column>
+                <p:column headerText="Modelo" sortBy="#{carro.modelo}">
+                    <h:outputText value="#{carro.modelo}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="Modelo">
+                    <h:outputText value="#{carro.fabricante}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="Modelo">
+                    <h:outputText value="#{carro.cor}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="Modelo">
+                    <h:outputText value="#{carro.ano}"></h:outputText>
+                </p:column>
+            </p:dataTable>
+        </p:fieldset>
+    </h:form>
+</ui:decorate>
+

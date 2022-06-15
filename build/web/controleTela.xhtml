@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml"
+             xmlns:p="http://primefaces.org/ui">
+    
+    
+    <h1>Bem Vindo ao Sistema</h1>
+    <h:form>
+        <p:commandButton value="Mudar para inserir" update="@form" action="#{carroBean.mudarParaInserir()}"></p:commandButton>
+        <p:commandButton value="Mudar para editar" update="@form" action="#{carroBean.mudarParaEditar()}"></p:commandButton>
+        <p:commandButton value="Mudar para buscar" update="@form" action="#{carroBean.mudarParaBuscar()}"></p:commandButton>
+        
+        <!-- VER ESSE outputtext  -->
+        <p:outputLabel value="inserir" rendered="#{carroBean.busca}"></p:outputLabel>
+        <p:outputLabel value="editar" rendered="#{carroBean.edita}"></p:outputLabel>
+        <p:outputLabel value="buscar" rendered="#{carroBean.insere}"></p:outputLabel>
+    </h:form>
+    
+   
+    
+</ui:decorate>
+
